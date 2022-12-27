@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/XEPDB1
+    username: augusto
+    password: augusto
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+  mvc:
+    log-request-details: true
+
+jwt:
+  expiration: 60000
+  secret: mySecret
+  refreshToken:
+    expiration: 120
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
