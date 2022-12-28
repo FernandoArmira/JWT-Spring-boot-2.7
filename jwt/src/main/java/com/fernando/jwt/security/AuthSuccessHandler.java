@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fernando.jwt.user.JwtUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -21,16 +22,17 @@ import java.time.ZonedDateTime;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final int expTime;
 
     private final String secret;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final JwtUserService jwtUserService;
 
-    public AuthSuccessHandler(int expTime, String secret, JwtUserService jwtUserService){
+    public AuthSuccessHandler(@Value("${jwt.secret}") String secret, JwtUserService jwtUserService, @Value("${jwt.expiration}") int expTime){
         this.expTime = expTime;
         this.secret = secret;
         this.jwtUserService = jwtUserService;
